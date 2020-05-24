@@ -1,8 +1,8 @@
 ﻿#include <iostream>
-#include "nlohmann/json.hpp"
 #include <fstream>
 #include <string>
 #include "time.h"
+#include "nlohmann/json.hpp"
 using namespace std;
 using json = nlohmann::json;
 
@@ -14,7 +14,7 @@ public:
 	virtual void decrypt(string& key_path, string& where_to_save, string& what_to_decrypt) = 0;
 };
 
-class Replacement : public Shifr
+class Zamena : public Shifr 
 {
 private:
 
@@ -221,7 +221,7 @@ public:
 	}
 };
 
-class Rearrangement : public Shifr
+class Perestanovka : public Shifr 
 {
 private:
 
@@ -409,7 +409,7 @@ public:
 		json key;
 		key_file >> key;
 		key_file.close();
-		if (key.at("alg_type") != "rearrangement")
+		if (key.at("alg_type") != "Perestanovka")
 		{
 			cout << "\n\nТип ключа неверный\n\n";
 			exit(0);
@@ -739,7 +739,7 @@ int main()
 						cout << "\n\nТы налагал, прочти выше как надо\n\n";
 						return 0;
 					}
-					Replacement rep;
+					Zamena rep;
 					rep.encrypt(key, save_path, what_to_encrypt);
 				}
 				else if (x == 2)
@@ -762,7 +762,7 @@ int main()
 						cout << "\n\nНе, не пойдет, почитай ещё раз как надо\n\n";
 						return 0;
 					}
-					Rearrangement rearr;
+					Perestanovka rearr;
 					rearr.encrypt(key, save_path, what_to_encrypt);
 				}
 				else if (x == 3)
@@ -816,7 +816,7 @@ int main()
 
 					cout << "Куда хочешь сохранить? Формат encrypt.txt): "; string save_path; cin >> save_path;
 
-					Replacement rep;
+					Zamena rep;
 					rep.decrypt(key, save_path, what_to_decrypt);
 				}
 				else if (x == 2)
@@ -834,7 +834,7 @@ int main()
 
 					cout << "Куда будем сохранять? В encrypt.txt только): "; string save_path; cin >> save_path;
 
-					Rearrangement rearr;
+					Perestanovka rearr;
 					rearr.decrypt(key, save_path, what_to_decrypt);
 				}
 				else if (x == 3)
@@ -893,7 +893,7 @@ int main()
 					return 0;
 				}
 				cout << "\n\nПуть для сохранения ключика в формате key: "; string key; cin >> key;
-				Replacement rep;
+				Zamena rep;
 				rep.key_gen(alph, key);
 			}
 			else if (x == 2)
@@ -903,7 +903,7 @@ int main()
 
 				cout << "\n\nПуть для сохранения ключика в формате key: "; string key; cin >> key;
 				string empty = "";
-				Rearrangement rearr;
+				Perestanovka rearr;
 				rearr.key_gen(empty, key);
 			}
 			else if (x == 3)
